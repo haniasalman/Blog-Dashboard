@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Blog Dashboard with Next.js, MUI, and RTK Query
 
-## Getting Started
+![Blog Dashboard Screenshot](./src/assets/images/git-image.png) *(Add screenshot later)*
 
-First, run the development server:
+A responsive blog dashboard built with Next.js, Material-UI, Redux Toolkit Query, and TypeScript. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Local Setup
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Prerequisites
+- Node.js v16+
+- npm or yarn
+- Git
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Installation
+1. Clone the repository:
+   ```bash
+   https://github.com/haniasalman/Blog-Dashboard.git
+   cd blog-dashboard
+2. Install dependencies:
+   ``` bash
+   npm install
+   # or
+   yarn install
+3. Run the development server:
+   ``` bash
+   npm run dev
+4. Open http://localhost:3000 in your browser
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Technical Stack
+- Next.js 13
+- Material-UI (MUI) for UI components
+- RTK Query for data fetching/caching
+- TypeScript
+- Vercel for deployment ([Link to the app](https://blog-dashboard-sage.vercel.app/))
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+### Design Decisions
+#### 1. Architecture Choices
+- **App Router**: Used Next.js 13's modern router for better performance
+- **Client Components**: Isolated data-fetching logic in client components
+- **Modular Structure**: Separated API logic, components, and features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### 2. UI/UX Implementation
+- **Responsive Layout**: MUI Grid + custom hooks for device detection
+- **Color Scheme**: Mustard (#FFDB58) as primary with black/white
+- **Loading States**: Skeleton UI during data fetching
+- **Error Handling**: User-friendly error messages with retry options
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### 3. State Management
+- **RTK Query**: Chosen over React Query for Redux integration
+- **Cache Tags**: Implemented providesTags/invalidatesTags for auto-refetch
+- **Optimistic Updates**: Future enhancement possibility
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Challenges Faced
+#### 1. Hydration Mismatches
+- Console errors due to SSR/Client component differences  
+#### 2. RTK Query Cache Management
+- New posts weren't appearing in lists. Mock APIs return fake data but don’t save changes permanently. 
+- JSONPlaceholder (mock API) doesn’t persist created posts.
+#### 3. Responsive Layout Shifts
+- UI elements jumping around on different screen sizes
+- CSS loading flashes as it was showing unstyled raw HTML (big headers, no colors)
+#### 4. Dynamic Route Params
+- TypeScript errors when trying to access URL parameters like /posts/1 (where 1 is a post ID)
